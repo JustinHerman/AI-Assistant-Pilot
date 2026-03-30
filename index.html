@@ -1,0 +1,217 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>GovAI GTM Intelligence — Federal Agency Opportunity Dashboard</title>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@uswds/uswds@3.8.0/dist/css/uswds.min.css">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <!-- Header -->
+  <header class="govai-header">
+    <div class="header-inner">
+      <div class="header-brand">
+        <div class="brand-icon" aria-hidden="true">
+          <svg width="32" height="32" viewBox="0 0 32 32" fill="none">
+            <rect width="32" height="32" rx="6" fill="#005ea2"/>
+            <path d="M8 22V10l8-4 8 4v12l-8 4-8-4z" fill="#fff" opacity=".9"/>
+            <path d="M16 6v20M8 10l8 4 8-4M8 16l8 4 8-4" stroke="#005ea2" stroke-width="1.2"/>
+          </svg>
+        </div>
+        <div class="brand-text">
+          <h1 class="brand-title">GovAI GTM Intelligence</h1>
+          <p class="brand-subtitle">Federal Agency Opportunity Dashboard</p>
+        </div>
+      </div>
+      <div class="header-actions">
+        <span class="last-refreshed" id="lastRefreshed"></span>
+        <button class="header-btn" id="btnRefresh" title="Refresh data" aria-label="Refresh data">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M23 4v6h-6"/><path d="M1 20v-6h6"/><path d="M3.51 9a9 9 0 0114.85-3.36L23 10M1 14l4.64 4.36A9 9 0 0020.49 15"/></svg>
+        </button>
+        <button class="header-btn" id="btnSettings" title="Settings" aria-label="Settings">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 00.33 1.82l.06.06a2 2 0 01-2.83 2.83l-.06-.06a1.65 1.65 0 00-1.82-.33 1.65 1.65 0 00-1 1.51V21a2 2 0 01-4 0v-.09A1.65 1.65 0 009 19.4a1.65 1.65 0 00-1.82.33l-.06.06a2 2 0 01-2.83-2.83l.06-.06A1.65 1.65 0 004.68 15a1.65 1.65 0 00-1.51-1H3a2 2 0 010-4h.09A1.65 1.65 0 004.6 9a1.65 1.65 0 00-.33-1.82l-.06-.06a2 2 0 012.83-2.83l.06.06A1.65 1.65 0 009 4.68a1.65 1.65 0 001-1.51V3a2 2 0 014 0v.09a1.65 1.65 0 001 1.51 1.65 1.65 0 001.82-.33l.06-.06a2 2 0 012.83 2.83l-.06.06A1.65 1.65 0 0019.4 9a1.65 1.65 0 001.51 1H21a2 2 0 010 4h-.09a1.65 1.65 0 00-1.51 1z"/></svg>
+        </button>
+        <a href="company-intelligence.html" class="header-btn header-link" title="Company Intelligence">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 13v6a2 2 0 01-2 2H5a2 2 0 01-2-2V8a2 2 0 012-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
+          <span class="header-link-text">Company Intel</span>
+        </a>
+      </div>
+    </div>
+  </header>
+
+  <!-- Tab Navigation -->
+  <nav class="tab-nav" role="tablist">
+    <button class="tab-btn active" data-tab="overview" role="tab" aria-selected="true">Overview</button>
+    <button class="tab-btn" data-tab="opportunities" role="tab" aria-selected="false">Opportunities</button>
+    <button class="tab-btn" data-tab="awards" role="tab" aria-selected="false">Awards</button>
+    <button class="tab-btn" data-tab="policy" role="tab" aria-selected="false">Policy &amp; Signals</button>
+  </nav>
+
+  <!-- Main Content -->
+  <main class="main-content">
+
+    <!-- Overview Tab -->
+    <section class="tab-panel active" id="panel-overview" role="tabpanel">
+      <!-- KPI Cards -->
+      <div class="kpi-grid">
+        <div class="kpi-card">
+          <div class="kpi-label">Active Opportunities</div>
+          <div class="kpi-value" id="kpiOpportunities">—</div>
+          <div class="kpi-change positive">+12% this month</div>
+        </div>
+        <div class="kpi-card">
+          <div class="kpi-label">Pipeline Value</div>
+          <div class="kpi-value" id="kpiPipeline">—</div>
+          <div class="kpi-change positive">+8% this quarter</div>
+        </div>
+        <div class="kpi-card">
+          <div class="kpi-label">Avg Match Score</div>
+          <div class="kpi-value" id="kpiMatchScore">—</div>
+          <div class="kpi-change neutral">Steady</div>
+        </div>
+        <div class="kpi-card">
+          <div class="kpi-label">Tracked Agencies</div>
+          <div class="kpi-value" id="kpiAgencies">—</div>
+          <div class="kpi-change positive">3 active</div>
+        </div>
+      </div>
+
+      <!-- Agency Cards -->
+      <h2 class="section-title">Agency Intelligence</h2>
+      <div class="agency-grid" id="agencyGrid">
+        <!-- Rendered by JS -->
+      </div>
+
+      <!-- Chart -->
+      <h2 class="section-title">Opportunity Trends</h2>
+      <div class="chart-container">
+        <canvas id="trendsChart"></canvas>
+      </div>
+    </section>
+
+    <!-- Opportunities Tab -->
+    <section class="tab-panel" id="panel-opportunities" role="tabpanel">
+      <div class="panel-header">
+        <h2 class="section-title">Federal Solicitations</h2>
+        <div class="filter-bar">
+          <input type="text" class="filter-input" id="oppFilter" placeholder="Filter by keyword..." aria-label="Filter opportunities">
+        </div>
+      </div>
+      <div class="table-wrap">
+        <table class="data-table" id="oppTable">
+          <thead>
+            <tr>
+              <th data-sort="title">Title</th>
+              <th data-sort="agency">Agency</th>
+              <th data-sort="type">Type</th>
+              <th data-sort="posted">Posted Date</th>
+              <th data-sort="deadline">Response Deadline</th>
+              <th data-sort="score">Match Score</th>
+            </tr>
+          </thead>
+          <tbody id="oppTableBody">
+          </tbody>
+        </table>
+      </div>
+      <div class="pagination-bar">
+        <button class="btn-show-more" id="oppShowMore">Show more</button>
+      </div>
+      <div class="spinner-wrap" id="oppSpinner"><div class="spinner"></div></div>
+    </section>
+
+    <!-- Awards Tab -->
+    <section class="tab-panel" id="panel-awards" role="tabpanel">
+      <div class="panel-header">
+        <h2 class="section-title">Contract Awards</h2>
+        <div class="filter-bar">
+          <input type="text" class="filter-input" id="awardsFilter" placeholder="Filter by keyword..." aria-label="Filter awards">
+        </div>
+      </div>
+      <div class="table-wrap">
+        <table class="data-table" id="awardsTable">
+          <thead>
+            <tr>
+              <th data-sort="title">Award Title</th>
+              <th data-sort="recipient">Recipient</th>
+              <th data-sort="agency">Agency</th>
+              <th data-sort="amount">Award Amount</th>
+              <th data-sort="date">Date</th>
+              <th data-sort="naics">NAICS</th>
+            </tr>
+          </thead>
+          <tbody id="awardsTableBody">
+          </tbody>
+        </table>
+      </div>
+      <div class="pagination-bar">
+        <button class="btn-show-more" id="awardsShowMore">Show more</button>
+      </div>
+      <div class="spinner-wrap" id="awardsSpinner"><div class="spinner"></div></div>
+    </section>
+
+    <!-- Policy & Signals Tab -->
+    <section class="tab-panel" id="panel-policy" role="tabpanel">
+      <div class="panel-header">
+        <h2 class="section-title">Policy &amp; Signals Feed</h2>
+        <div class="filter-bar">
+          <input type="text" class="filter-input" id="policyFilter" placeholder="Filter by keyword..." aria-label="Filter policy items">
+        </div>
+      </div>
+      <div class="policy-toggles" id="policyToggles">
+        <button class="toggle-btn active" data-type="all">All</button>
+        <button class="toggle-btn" data-type="executive_order">Executive Orders</button>
+        <button class="toggle-btn" data-type="omb_notice">OMB Notices</button>
+        <button class="toggle-btn" data-type="contractor_intel">Contractor Intelligence</button>
+        <button class="toggle-btn" data-type="budget_update">Budget Updates</button>
+      </div>
+      <div class="policy-feed" id="policyFeed">
+        <!-- Rendered by JS -->
+      </div>
+      <div class="spinner-wrap" id="policySpinner"><div class="spinner"></div></div>
+    </section>
+  </main>
+
+  <!-- Settings Modal -->
+  <div class="modal-overlay" id="settingsModal">
+    <div class="modal-dialog" role="dialog" aria-label="Settings">
+      <div class="modal-header">
+        <h2>Settings</h2>
+        <button class="modal-close" id="modalClose" aria-label="Close settings">&times;</button>
+      </div>
+      <div class="modal-body">
+        <div class="setting-group">
+          <label class="setting-label" for="samApiKey">SAM.gov API Key</label>
+          <input type="password" class="setting-input" id="samApiKey" placeholder="Enter your SAM.gov API key">
+          <p class="setting-help">Get a free API key at <a href="https://sam.gov/content/entity-registration" target="_blank" rel="noopener">SAM.gov</a>. Without a key, demo data will be displayed.</p>
+        </div>
+        <div class="api-status" id="apiStatus">
+          <div class="status-row">
+            <span class="status-label">SAM.gov API</span>
+            <span class="status-badge" id="samStatus">Not configured</span>
+          </div>
+          <div class="status-row">
+            <span class="status-label">USASpending API</span>
+            <span class="status-badge connected">Available</span>
+          </div>
+          <div class="status-row">
+            <span class="status-label">Federal Register API</span>
+            <span class="status-badge connected">Available</span>
+          </div>
+          <div class="status-row">
+            <span class="status-label">GDELT API</span>
+            <span class="status-badge connected">Available</span>
+          </div>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button class="btn-secondary" id="modalCancel">Cancel</button>
+        <button class="btn-primary" id="modalSave">Save Settings</button>
+      </div>
+    </div>
+  </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
+  <script src="dashboard.js"></script>
+</body>
+</html>

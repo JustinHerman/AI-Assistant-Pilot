@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>GovAI GTM — Company × Policy Intelligence</title>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@uswds/uswds@3.8.0/dist/css/uswds.min.css">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <!-- Header -->
+  <header class="govai-header">
+    <div class="header-inner">
+      <div class="header-brand">
+        <div class="brand-icon" aria-hidden="true">
+          <svg width="32" height="32" viewBox="0 0 32 32" fill="none">
+            <rect width="32" height="32" rx="6" fill="#005ea2"/>
+            <path d="M8 22V10l8-4 8 4v12l-8 4-8-4z" fill="#fff" opacity=".9"/>
+            <path d="M16 6v20M8 10l8 4 8-4M8 16l8 4 8-4" stroke="#005ea2" stroke-width="1.2"/>
+          </svg>
+        </div>
+        <div class="brand-text">
+          <h1 class="brand-title">GovAI GTM Intelligence</h1>
+          <p class="brand-subtitle">Company &times; Policy Intelligence</p>
+        </div>
+      </div>
+      <div class="header-actions">
+        <a href="index.html" class="header-btn header-link" title="Back to Dashboard">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M19 12H5"/><polyline points="12 19 5 12 12 5"/></svg>
+          <span class="header-link-text">Dashboard</span>
+        </a>
+      </div>
+    </div>
+  </header>
+
+  <!-- Hero Section -->
+  <section class="ci-hero">
+    <div class="ci-hero-inner">
+      <h2 class="ci-hero-title">Company &times; Policy Intelligence</h2>
+      <p class="ci-hero-desc">Search across federal policies, executive orders, contract awards, and competitive intelligence signals.</p>
+      <div class="ci-search-wrap">
+        <input type="text" class="ci-search-input" id="ciSearchInput" placeholder="Search companies, capabilities, or policy areas...">
+        <button class="ci-search-btn" id="ciSearchBtn" aria-label="Search">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+        </button>
+      </div>
+      <div class="ci-chips">
+        <button class="ci-chip" data-query="AI code review">AI code review</button>
+        <button class="ci-chip" data-query="DevSecOps platform">DevSecOps platform</button>
+        <button class="ci-chip" data-query="Palantir">Palantir</button>
+        <button class="ci-chip" data-query="zero trust">zero trust</button>
+      </div>
+    </div>
+  </section>
+
+  <!-- API Status Indicators -->
+  <section class="ci-api-status">
+    <div class="ci-api-row" id="ciApiRow">
+      <span class="ci-api-badge" id="ciFedRegStatus" data-api="Federal Register">
+        <span class="ci-api-dot"></span> Federal Register
+      </span>
+      <span class="ci-api-badge" id="ciUsaSpendStatus" data-api="USASpending">
+        <span class="ci-api-dot"></span> USASpending
+      </span>
+      <span class="ci-api-badge" id="ciGdeltStatus" data-api="GDELT">
+        <span class="ci-api-dot"></span> GDELT
+      </span>
+      <span class="ci-api-badge" id="ciAiBriefStatus" data-api="AI Brief">
+        <span class="ci-api-dot"></span> AI Brief
+      </span>
+    </div>
+  </section>
+
+  <!-- Results Display -->
+  <main class="ci-main">
+    <!-- Loading state -->
+    <div class="spinner-wrap" id="ciSpinner" style="display:none;"><div class="spinner"></div></div>
+
+    <!-- Empty state -->
+    <div class="ci-empty" id="ciEmpty">
+      <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="#71767a" stroke-width="1.5"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+      <p>Enter a search query above to explore federal intelligence across policies, awards, and signals.</p>
+    </div>
+
+    <!-- Results container -->
+    <div class="ci-results" id="ciResults" style="display:none;">
+
+      <!-- AI Brief Card -->
+      <div class="ci-brief-card" id="ciBriefCard">
+        <div class="ci-brief-header">
+          <span class="ci-brief-icon">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2a10 10 0 110 20 10 10 0 010-20z"/><path d="M12 16v-4M12 8h.01"/></svg>
+          </span>
+          <span class="ci-brief-title">AI Intelligence Brief</span>
+          <span class="live-badge">LIVE</span>
+        </div>
+        <div class="ci-brief-body" id="ciBriefBody">
+          <!-- Rendered by JS -->
+        </div>
+      </div>
+
+      <!-- Results Grid -->
+      <div class="ci-results-grid" id="ciResultsGrid">
+        <!-- Executive Orders Column -->
+        <div class="ci-result-col">
+          <h3 class="ci-col-title">Executive Orders</h3>
+          <div class="ci-col-list" id="ciEoList"></div>
+        </div>
+        <!-- Related Policies Column -->
+        <div class="ci-result-col">
+          <h3 class="ci-col-title">Related Policies</h3>
+          <div class="ci-col-list" id="ciPolicyList"></div>
+        </div>
+        <!-- Contract Awards Column -->
+        <div class="ci-result-col">
+          <h3 class="ci-col-title">Relevant Awards</h3>
+          <div class="ci-col-list" id="ciAwardsList"></div>
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <script src="company-intelligence.js"></script>
+</body>
+</html>
