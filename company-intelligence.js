@@ -131,7 +131,7 @@
             title: doc.title || 'Executive Document',
             date: doc.publication_date || '',
             source: 'Federal Register',
-            description: doc.abstract || doc.excerpts || '',
+            description: this.stripHtml(doc.abstract || doc.excerpts || ''),
             score: this.computeScore(query, doc.title + ' ' + (doc.abstract || '')),
             live: daysDiff < 30,
             url: doc.html_url
@@ -356,6 +356,13 @@
       const div = document.createElement('div');
       div.textContent = str || '';
       return div.innerHTML;
+    },
+
+    stripHtml(str) {
+      if (!str) return '';
+      const div = document.createElement('div');
+      div.innerHTML = str;
+      return div.textContent || '';
     },
 
     dateOffset(days) {
