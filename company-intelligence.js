@@ -484,7 +484,7 @@ Write a professional, actionable narrative. Use specific references to the data 
       const container = document.getElementById(containerId);
 
       if (items.length === 0) {
-        container.innerHTML = '<p style="font-size:.85rem;color:var(--muted);padding:12px;">No results found.</p>';
+        container.innerHTML = '<p style="font-size:.85rem;color:var(--text-muted);padding:12px;">No results found.</p>';
         return;
       }
 

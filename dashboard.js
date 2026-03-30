@@ -349,25 +349,25 @@
             {
               label: 'RFPs',
               data: [12, 15, 10, 18, 14, 22],
-              backgroundColor: '#005ea2',
+              backgroundColor: '#3b82f6',
               borderRadius: 4
             },
             {
               label: 'Pre-Solicitations',
               data: [8, 6, 9, 7, 11, 9],
-              backgroundColor: '#2e8540',
+              backgroundColor: '#10b981',
               borderRadius: 4
             },
             {
               type: 'line',
               label: 'Avg Match Score',
               data: [68, 72, 70, 75, 73, 78],
-              borderColor: '#e5a000',
-              backgroundColor: 'rgba(229,160,0,.1)',
+              borderColor: '#f59e0b',
+              backgroundColor: 'rgba(245,158,11,.1)',
               yAxisID: 'y1',
               tension: 0.3,
               pointRadius: 4,
-              pointBackgroundColor: '#e5a000'
+              pointBackgroundColor: '#f59e0b'
             }
           ]
         },
@@ -685,7 +685,7 @@
       }
 
       if (items.length === 0) {
-        feed.innerHTML = '<p style="text-align:center;color:var(--muted);padding:24px;">No policy items match your filters.</p>';
+        feed.innerHTML = '<p style="text-align:center;color:var(--text-muted);padding:24px;">No policy items match your filters.</p>';
         return;
       }
 
