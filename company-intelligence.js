@@ -4,6 +4,7 @@
   'use strict';
 
   const CI = {
+    _narrativeGenId: 0,
     apis: {
       fedReg: { el: 'ciFedRegStatus', status: 'checking' },
       usaSpend: { el: 'ciUsaSpendStatus', status: 'checking' },
@@ -292,6 +293,7 @@
     },
 
     async generateNarrative(query, eos, policies, awards) {
+      const genId = ++this._narrativeGenId;
       const content = document.getElementById('ciNarrativeContent');
       const loading = document.getElementById('ciNarrativeLoading');
       const badge = document.getElementById('ciNarrativeBadge');
@@ -305,12 +307,14 @@
       if (apiKey) {
         try {
           const narrative = await this.callOpenAI(apiKey, query, eos, policies, awards);
+          if (genId !== this._narrativeGenId) return;
           loading.style.display = 'none';
           badge.textContent = 'AI-Generated';
           badge.className = 'ci-narrative-badge ai-powered';
           content.innerHTML = this.formatNarrative(narrative);
           return;
         } catch (err) {
+          if (genId !== this._narrativeGenId) return;
           console.warn('OpenAI narrative generation failed, using fallback:', err);
           badge.textContent = 'Fallback';
           badge.className = 'ci-narrative-badge fallback';
@@ -320,6 +324,7 @@
         badge.className = 'ci-narrative-badge fallback';
       }
 
+      if (genId !== this._narrativeGenId) return;
       // Fallback: generate local narrative
       const fallback = this.generateLocalNarrative(query, eos, policies, awards);
       loading.style.display = 'none';
