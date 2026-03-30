@@ -88,6 +88,9 @@
       results.style.display = 'none';
       spinner.style.display = 'block';
 
+      // Reset narrative card
+      this.resetNarrative();
+
       let eoResults = [];
       let policyResults = [];
       let awardResults = [];
@@ -114,6 +117,9 @@
 
       spinner.style.display = 'none';
       results.style.display = 'block';
+
+      // Generate GTM narrative (async, renders when ready)
+      this.generateNarrative(query, eoResults, policyResults, awardResults);
     },
 
     /* --- Data Fetching --- */
@@ -270,6 +276,176 @@
           live: false
         }
       ];
+    },
+
+    /* --- GTM Narrative Generation (Gen AI) --- */
+    resetNarrative() {
+      const content = document.getElementById('ciNarrativeContent');
+      const loading = document.getElementById('ciNarrativeLoading');
+      const badge = document.getElementById('ciNarrativeBadge');
+      if (content) content.innerHTML = '';
+      if (loading) loading.style.display = 'none';
+      if (badge) {
+        badge.textContent = 'AI-Generated';
+        badge.className = 'ci-narrative-badge';
+      }
+    },
+
+    async generateNarrative(query, eos, policies, awards) {
+      const content = document.getElementById('ciNarrativeContent');
+      const loading = document.getElementById('ciNarrativeLoading');
+      const badge = document.getElementById('ciNarrativeBadge');
+      const apiKey = localStorage.getItem('govai_openai_api_key');
+
+      if (!content || !loading || !badge) return;
+
+      loading.style.display = 'flex';
+      content.innerHTML = '';
+
+      if (apiKey) {
+        try {
+          const narrative = await this.callOpenAI(apiKey, query, eos, policies, awards);
+          loading.style.display = 'none';
+          badge.textContent = 'AI-Generated';
+          badge.className = 'ci-narrative-badge ai-powered';
+          content.innerHTML = this.formatNarrative(narrative);
+          return;
+        } catch (err) {
+          console.warn('OpenAI narrative generation failed, using fallback:', err);
+          badge.textContent = 'Fallback';
+          badge.className = 'ci-narrative-badge fallback';
+        }
+      } else {
+        badge.textContent = 'Local Analysis';
+        badge.className = 'ci-narrative-badge fallback';
+      }
+
+      // Fallback: generate local narrative
+      const fallback = this.generateLocalNarrative(query, eos, policies, awards);
+      loading.style.display = 'none';
+      content.innerHTML = this.formatNarrative(fallback);
+    },
+
+    async callOpenAI(apiKey, query, eos, policies, awards) {
+      const eoSummary = eos.slice(0, 5).map(e => `- ${e.title} (${e.date}): ${e.description}`).join('\n');
+      const policySummary = policies.slice(0, 5).map(p => `- ${p.title} (${p.source}): ${p.description}`).join('\n');
+      const awardSummary = awards.slice(0, 5).map(a => `- ${a.title} (${a.source}): ${a.description}`).join('\n');
+
+      const prompt = `You are a federal go-to-market (GTM) intelligence analyst. Given the search query and federal data below, write a concise GTM narrative (3-5 paragraphs) explaining:
+
+1. How the company or use case "${query}" relates to the executive orders and federal policies found
+2. What contract opportunities exist based on the awards data
+3. Key GTM recommendations for positioning in the federal market
+4. Any regulatory or compliance considerations
+
+Executive Orders & Presidential Documents:
+${eoSummary || 'None found'}
+
+Federal Policies & Notices:
+${policySummary || 'None found'}
+
+Contract Awards:
+${awardSummary || 'None found'}
+
+Write a professional, actionable narrative. Use specific references to the data provided. Do not use markdown formatting.`;
+
+      const resp = await fetch('https://api.openai.com/v1/chat/completions', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          'Authorization': 'Bearer ' + apiKey
+        },
+        body: JSON.stringify({
+          model: 'gpt-4o-mini',
+          messages: [{ role: 'user', content: prompt }],
+          max_tokens: 800,
+          temperature: 0.7
+        })
+      });
+
+      if (!resp.ok) {
+        const errBody = await resp.text();
+        throw new Error('OpenAI API error ' + resp.status + ': ' + errBody);
+      }
+
+      const json = await resp.json();
+      return json.choices[0].message.content;
+    },
+
+    generateLocalNarrative(query, eos, policies, awards) {
+      const totalResults = eos.length + policies.length + awards.length;
+      if (totalResults === 0) {
+        return 'No federal data found for "' + query + '". Try broadening your search terms or using related keywords. Consider searching for the underlying technology, agency name, or NAICS code associated with your product or service.';
+      }
+
+      let narrative = '';
+
+      // Opening context
+      narrative += 'Federal Market Analysis for "' + query + '"\n\n';
+
+      // EO analysis
+      if (eos.length > 0) {
+        const topEOs = eos.slice(0, 3);
+        narrative += 'Executive Order Alignment: ';
+        narrative += topEOs.length + ' executive order' + (topEOs.length > 1 ? 's' : '') + ' directly relate to this capability area. ';
+        narrative += 'The most relevant is "' + topEOs[0].title + '"';
+        if (topEOs[0].description) {
+          narrative += ', which ' + topEOs[0].description.charAt(0).toLowerCase() + topEOs[0].description.slice(1);
+          if (!topEOs[0].description.endsWith('.')) narrative += '.';
+        } else {
+          narrative += '.';
+        }
+        if (topEOs.length > 1) {
+          narrative += ' Additional relevant directives include "' + topEOs[1].title + '".';
+        }
+        narrative += ' These directives create federal demand signals that organizations offering ' + query + ' capabilities should align their proposals to.\n\n';
+      }
+
+      // Policy landscape
+      if (policies.length > 0) {
+        narrative += 'Policy Landscape: ';
+        narrative += policies.length + ' related polic' + (policies.length > 1 ? 'ies have' : 'y has') + ' been identified. ';
+        const agencies = [...new Set(policies.map(p => p.source))].slice(0, 3);
+        narrative += 'Key agencies driving requirements include ' + agencies.join(', ') + '. ';
+        narrative += 'These policies establish the compliance framework and procurement priorities that vendors must address in their federal GTM strategy.\n\n';
+      }
+
+      // Contract landscape
+      if (awards.length > 0) {
+        narrative += 'Contract Activity: ';
+        narrative += awards.length + ' relevant contract award' + (awards.length > 1 ? 's indicate' : ' indicates') + ' active federal spending in this area. ';
+        const topAward = awards[0];
+        narrative += 'Notable activity includes "' + topAward.title + '" via ' + topAward.source;
+        if (topAward.description) {
+          narrative += ' (' + topAward.description + ')';
+        }
+        narrative += '. ';
+        const awardAgencies = [...new Set(awards.map(a => a.source))].slice(0, 3);
+        if (awardAgencies.length > 1) {
+          narrative += 'Contracting activity spans ' + awardAgencies.join(', ') + ', suggesting broad federal demand.\n\n';
+        } else {
+          narrative += '\n\n';
+        }
+      }
+
+      // GTM recommendation
+      narrative += 'GTM Recommendation: ';
+      if (eos.length > 0 && awards.length > 0) {
+        narrative += 'Strong alignment between executive directives and active contract awards suggests a favorable GTM window. Prioritize responses to upcoming solicitations and leverage executive order references in proposals to demonstrate policy alignment.';
+      } else if (eos.length > 0) {
+        narrative += 'Executive-level attention to this area indicates emerging demand. Position early by engaging with agency innovation programs and responding to RFIs to shape upcoming requirements.';
+      } else if (awards.length > 0) {
+        narrative += 'Active contract awards demonstrate established procurement patterns. Analyze incumbent vendors and contract vehicles to identify teaming or competitive displacement opportunities.';
+      } else {
+        narrative += 'Limited direct federal activity found. Consider adjacent search terms, engaging with agency innovation offices, or exploring small business set-aside opportunities.';
+      }
+
+      return narrative;
+    },
+
+    formatNarrative(text) {
+      const paragraphs = text.split(/\n\n+/).filter(p => p.trim());
+      return paragraphs.map(p => '<p class="ci-narrative-paragraph">' + this.escHtml(p) + '</p>').join('');
     },
 
     /* --- AI Brief Generation --- */

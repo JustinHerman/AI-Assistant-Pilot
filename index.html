@@ -185,6 +185,11 @@
           <input type="password" class="setting-input" id="samApiKey" placeholder="Enter your SAM.gov API key">
           <p class="setting-help">Get a free API key at <a href="https://sam.gov/content/entity-registration" target="_blank" rel="noopener">SAM.gov</a>. Without a key, demo data will be displayed.</p>
         </div>
+        <div class="setting-group">
+          <label class="setting-label" for="openaiApiKey">OpenAI API Key <span style="font-weight:400;color:var(--muted);">(for GTM Narrative)</span></label>
+          <input type="password" class="setting-input" id="openaiApiKey" placeholder="Enter your OpenAI API key (sk-...)">
+          <p class="setting-help">Powers the Gen AI narrative on the Company Intelligence page. Get a key at <a href="https://platform.openai.com/api-keys" target="_blank" rel="noopener">platform.openai.com</a>. Without a key, a local summary will be generated.</p>
+        </div>
         <div class="api-status" id="apiStatus">
           <div class="status-row">
             <span class="status-label">SAM.gov API</span>

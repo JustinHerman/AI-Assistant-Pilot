@@ -207,6 +207,8 @@
       btnOpen.addEventListener('click', () => {
         const key = localStorage.getItem('govai_sam_api_key') || '';
         document.getElementById('samApiKey').value = key;
+        const aiKey = localStorage.getItem('govai_openai_api_key') || '';
+        document.getElementById('openaiApiKey').value = aiKey;
         modal.classList.add('open');
       });
 
@@ -223,6 +225,12 @@
           localStorage.setItem('govai_sam_api_key', key);
         } else {
           localStorage.removeItem('govai_sam_api_key');
+        }
+        const aiKey = document.getElementById('openaiApiKey').value.trim();
+        if (aiKey) {
+          localStorage.setItem('govai_openai_api_key', aiKey);
+        } else {
+          localStorage.removeItem('govai_openai_api_key');
         }
         this.updateApiStatus();
         closeModal();

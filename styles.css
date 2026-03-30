@@ -677,6 +677,56 @@ input { font-family: inherit; }
 .ci-brief-title { font-weight: 700; font-size: 0.95rem; color: var(--navy); }
 .ci-brief-body { font-size: 0.9rem; line-height: 1.6; color: var(--text); }
 
+/* GTM Narrative Card */
+.ci-narrative-card {
+  background: linear-gradient(135deg, #f5f0fa 0%, #e8eaf6 100%);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow);
+  padding: 20px 24px;
+  margin-bottom: 24px;
+  border: 1px solid #c5cae9;
+}
+.ci-narrative-header {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 12px;
+}
+.ci-narrative-icon { display: flex; color: #5c6bc0; }
+.ci-narrative-title { font-weight: 700; font-size: 0.95rem; color: var(--navy); }
+.ci-narrative-badge {
+  font-size: 0.7rem;
+  font-weight: 600;
+  padding: 2px 8px;
+  border-radius: 10px;
+  background: #e8eaf6;
+  color: #5c6bc0;
+  margin-left: auto;
+}
+.ci-narrative-badge.ai-powered {
+  background: #e8f5e9;
+  color: #2e7d32;
+}
+.ci-narrative-badge.fallback {
+  background: #fff3e0;
+  color: #e65100;
+}
+.ci-narrative-body { font-size: 0.88rem; line-height: 1.65; color: var(--text); }
+.ci-narrative-loading {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  color: var(--muted);
+  font-size: 0.85rem;
+  padding: 8px 0;
+}
+.ci-narrative-paragraph {
+  margin: 0 0 12px 0;
+}
+.ci-narrative-paragraph:last-child {
+  margin-bottom: 0;
+}
+
 /* Results Grid */
 .ci-results-grid {
   display: grid;
