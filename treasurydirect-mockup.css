@@ -577,6 +577,81 @@ ul { list-style: none; }
   margin: var(--space-5) 0;
 }
 
+/* Identity Provider Buttons */
+.td-hero__card-or {
+  font-size: 0.75rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  color: var(--base);
+  text-align: center;
+  margin-bottom: var(--space-4);
+}
+
+.td-hero__card-idp {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-3);
+}
+
+.td-idp-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--space-3);
+  padding: var(--space-3) var(--space-5);
+  border-radius: var(--radius);
+  font-size: 0.875rem;
+  font-weight: 600;
+  font-family: var(--font-sans);
+  cursor: pointer;
+  border: 2px solid;
+  transition: all var(--duration) var(--ease);
+  text-decoration: none;
+  line-height: 1.4;
+}
+
+.td-idp-btn__logo {
+  flex-shrink: 0;
+}
+
+.td-idp-btn--logingov {
+  background: var(--white);
+  border-color: #0050d8;
+  color: #0050d8;
+}
+.td-idp-btn--logingov:hover {
+  background: #0050d8;
+  color: var(--white);
+}
+.td-idp-btn--logingov:hover .td-idp-btn__logo rect { fill: white; }
+.td-idp-btn--logingov:hover .td-idp-btn__logo path { stroke: #0050d8; }
+
+.td-idp-btn--idme {
+  background: var(--white);
+  border-color: #2d8c3c;
+  color: #2d8c3c;
+}
+.td-idp-btn--idme:hover {
+  background: #2d8c3c;
+  color: var(--white);
+}
+.td-idp-btn--idme:hover .td-idp-btn__logo rect { fill: white; }
+.td-idp-btn--idme:hover .td-idp-btn__logo path { fill: #2d8c3c; }
+
+.td-idp-btn--clear {
+  background: var(--white);
+  border-color: #00263e;
+  color: #00263e;
+}
+.td-idp-btn--clear:hover {
+  background: #00263e;
+  color: var(--white);
+}
+.td-idp-btn--clear:hover .td-idp-btn__logo rect { fill: white; }
+.td-idp-btn--clear:hover .td-idp-btn__logo circle { stroke: #00263e; }
+.td-idp-btn--clear:hover .td-idp-btn__logo path { stroke: #00263e; }
+
 .td-hero__card-services {
   display: flex;
   gap: var(--space-4);
