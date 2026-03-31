@@ -461,7 +461,22 @@ ul { list-style: none; }
   background: linear-gradient(90deg, transparent, rgba(255,255,255,0.1), transparent);
 }
 
+.td-hero__eagle {
+  position: absolute;
+  left: 8%;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 340px;
+  height: 340px;
+  opacity: 0.06;
+  pointer-events: none;
+  filter: brightness(0) invert(1);
+  z-index: 0;
+}
+
 .td-hero__inner {
+  position: relative;
+  z-index: 1;
   max-width: var(--container);
   margin: 0 auto;
   padding: var(--space-10) var(--space-5);
@@ -1388,6 +1403,7 @@ ul { list-style: none; }
     z-index: 99;
   }
 
+  .td-hero__eagle { width: 220px; height: 220px; left: 4%; opacity: 0.04; }
   .td-hero__heading { font-size: 2rem; }
   .td-quick-actions__grid { grid-template-columns: repeat(2, 1fr); }
   .td-rates__grid { grid-template-columns: 1fr; }
