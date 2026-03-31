@@ -1,0 +1,537 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>TreasuryDirect — U.S. Department of the Treasury</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Public+Sans:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+  <link rel="stylesheet" href="treasurydirect-mockup.css">
+</head>
+<body>
+
+<!-- ===== USWDS Gov Banner ===== -->
+<section class="usa-banner" aria-label="Official website of the United States government">
+  <div class="usa-banner__inner">
+    <div class="usa-banner__header">
+      <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='11'%3E%3Crect width='16' height='11' fill='%23002868'/%3E%3Crect y='0' width='16' height='0.85' fill='%23BF0A30'/%3E%3Crect y='1.7' width='16' height='0.85' fill='%23BF0A30'/%3E%3Crect y='3.4' width='16' height='0.85' fill='%23BF0A30'/%3E%3Crect y='5.1' width='16' height='0.85' fill='%23BF0A30'/%3E%3Crect y='6.8' width='7' height='0.85' fill='white'/%3E%3Crect y='8.5' width='16' height='0.85' fill='%23BF0A30'/%3E%3Crect y='10.15' width='16' height='0.85' fill='%23BF0A30'/%3E%3C/svg%3E" alt="U.S. flag" class="usa-banner__flag" width="16" height="11">
+      <span class="usa-banner__text">An official website of the United States government</span>
+      <button class="usa-banner__button" aria-expanded="false" id="bannerToggle">
+        <span>Here's how you know</span>
+        <i class="fas fa-chevron-down"></i>
+      </button>
+    </div>
+    <div class="usa-banner__content" id="bannerContent" hidden>
+      <div class="usa-banner__guidance">
+        <div class="usa-banner__guidance-item">
+          <i class="fas fa-landmark"></i>
+          <div>
+            <p><strong>Official websites use .gov</strong></p>
+            <p>A <strong>.gov</strong> website belongs to an official government organization in the United States.</p>
+          </div>
+        </div>
+        <div class="usa-banner__guidance-item">
+          <i class="fas fa-lock"></i>
+          <div>
+            <p><strong>Secure .gov websites use HTTPS</strong></p>
+            <p>A <strong>lock</strong> (<i class="fas fa-lock" style="font-size:.7em"></i>) or <strong>https://</strong> means you've safely connected to the .gov website.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== Header ===== -->
+<header class="td-header">
+  <div class="td-header__inner">
+    <div class="td-header__brand">
+      <div class="td-header__logo">
+        <svg width="36" height="36" viewBox="0 0 36 36" fill="none">
+          <rect width="36" height="36" rx="8" fill="#1a4480"/>
+          <text x="18" y="24" text-anchor="middle" font-size="18" font-weight="700" fill="white" font-family="Public Sans, sans-serif">TD</text>
+        </svg>
+      </div>
+      <div class="td-header__title">
+        <span class="td-header__name">TreasuryDirect</span>
+        <span class="td-header__dept">U.S. Department of the Treasury</span>
+      </div>
+    </div>
+    <nav class="td-header__nav" aria-label="Primary navigation">
+      <ul class="td-nav__list">
+        <li><a href="#" class="td-nav__link td-nav__link--active">Home</a></li>
+        <li class="td-nav__dropdown">
+          <button class="td-nav__link td-nav__dropdown-btn">Savings Bonds <i class="fas fa-chevron-down"></i></button>
+        </li>
+        <li class="td-nav__dropdown">
+          <button class="td-nav__link td-nav__dropdown-btn">Securities <i class="fas fa-chevron-down"></i></button>
+        </li>
+        <li><a href="#" class="td-nav__link">Auctions</a></li>
+        <li><a href="#" class="td-nav__link">Research</a></li>
+        <li><a href="#" class="td-nav__link">Help</a></li>
+      </ul>
+    </nav>
+    <div class="td-header__actions">
+      <button class="td-header__search-btn" aria-label="Search" id="searchToggle">
+        <i class="fas fa-search"></i>
+      </button>
+      <a href="#" class="td-btn td-btn--outline-light">Log In</a>
+      <a href="#" class="td-btn td-btn--primary">Open Account</a>
+    </div>
+    <button class="td-header__mobile-toggle" aria-label="Menu" id="mobileToggle">
+      <i class="fas fa-bars"></i>
+    </button>
+  </div>
+  <!-- Search overlay -->
+  <div class="td-search-overlay" id="searchOverlay" hidden>
+    <div class="td-search-overlay__inner">
+      <input type="search" class="td-search-overlay__input" placeholder="Search TreasuryDirect..." autofocus>
+      <button class="td-search-overlay__btn"><i class="fas fa-search"></i></button>
+      <button class="td-search-overlay__close" id="searchClose"><i class="fas fa-times"></i></button>
+    </div>
+  </div>
+</header>
+
+<!-- ===== Hero ===== -->
+<section class="td-hero">
+  <div class="td-hero__inner">
+    <div class="td-hero__content">
+      <p class="td-hero__eyebrow">The official U.S. government securities marketplace</p>
+      <h1 class="td-hero__heading">Invest in America's future with <span class="td-hero__accent">U.S. Treasury securities</span></h1>
+      <p class="td-hero__desc">Buy, manage, and redeem savings bonds and Treasury securities directly from the U.S. Department of the Treasury. No fees. No middleman.</p>
+      <div class="td-hero__actions">
+        <a href="#" class="td-btn td-btn--primary td-btn--lg">Open an Account</a>
+        <a href="#" class="td-btn td-btn--ghost td-btn--lg">Learn How It Works <i class="fas fa-arrow-right"></i></a>
+      </div>
+    </div>
+    <div class="td-hero__card">
+      <div class="td-hero__card-inner">
+        <h2 class="td-hero__card-title">Sign In to Your Account</h2>
+        <form class="td-hero__form">
+          <div class="td-form-group">
+            <label for="accountNum" class="td-label">Account Number</label>
+            <input type="text" id="accountNum" class="td-input" placeholder="Enter your account number">
+          </div>
+          <div class="td-form-group">
+            <label for="password" class="td-label">Password</label>
+            <input type="password" id="password" class="td-input" placeholder="Enter your password">
+          </div>
+          <button type="submit" class="td-btn td-btn--primary td-btn--full">Log In</button>
+        </form>
+        <div class="td-hero__card-links">
+          <a href="#">Forgot password?</a>
+          <a href="#">Login help</a>
+        </div>
+        <hr class="td-hero__card-divider">
+        <div class="td-hero__card-services">
+          <a href="#" class="td-service-badge">
+            <span class="td-service-badge__icon"><i class="fas fa-chart-line"></i></span>
+            FedInvest
+          </a>
+          <a href="#" class="td-service-badge">
+            <span class="td-service-badge__icon"><i class="fas fa-shield-halved"></i></span>
+            SLGSafe
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== Quick Actions ===== -->
+<section class="td-section td-quick-actions">
+  <div class="td-container">
+    <h2 class="td-section__heading">What would you like to do?</h2>
+    <div class="td-quick-actions__grid">
+      <a href="#" class="td-action-card">
+        <div class="td-action-card__icon"><i class="fas fa-cart-shopping"></i></div>
+        <h3>Buy a Savings Bond</h3>
+        <p>Purchase Series I or EE savings bonds electronically</p>
+        <span class="td-action-card__arrow"><i class="fas fa-arrow-right"></i></span>
+      </a>
+      <a href="#" class="td-action-card">
+        <div class="td-action-card__icon"><i class="fas fa-gift"></i></div>
+        <h3>Gift a Bond</h3>
+        <p>Give the gift of U.S. savings bonds to friends and family</p>
+        <span class="td-action-card__arrow"><i class="fas fa-arrow-right"></i></span>
+      </a>
+      <a href="#" class="td-action-card">
+        <div class="td-action-card__icon"><i class="fas fa-money-bill-transfer"></i></div>
+        <h3>Cash a Bond</h3>
+        <p>Redeem your eligible savings bonds and receive payment</p>
+        <span class="td-action-card__arrow"><i class="fas fa-arrow-right"></i></span>
+      </a>
+      <a href="#" class="td-action-card">
+        <div class="td-action-card__icon"><i class="fas fa-calculator"></i></div>
+        <h3>Find Bond Value</h3>
+        <p>Look up the current value of your savings bonds</p>
+        <span class="td-action-card__arrow"><i class="fas fa-arrow-right"></i></span>
+      </a>
+      <a href="#" class="td-action-card">
+        <div class="td-action-card__icon"><i class="fas fa-magnifying-glass-dollar"></i></div>
+        <h3>Search Securities</h3>
+        <p>Find Treasury securities by CUSIP, type, or maturity date</p>
+        <span class="td-action-card__arrow"><i class="fas fa-arrow-right"></i></span>
+      </a>
+      <a href="#" class="td-action-card">
+        <div class="td-action-card__icon"><i class="fas fa-sliders"></i></div>
+        <h3>Manage Account</h3>
+        <p>View holdings, update banking info, and manage your portfolio</p>
+        <span class="td-action-card__arrow"><i class="fas fa-arrow-right"></i></span>
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- ===== Today's Rates ===== -->
+<section class="td-section td-rates">
+  <div class="td-container">
+    <div class="td-rates__header">
+      <div>
+        <h2 class="td-section__heading">Today's Rates</h2>
+        <p class="td-section__subheading">Current interest rates for U.S. Treasury securities</p>
+      </div>
+      <a href="#" class="td-btn td-btn--outline">View All Rates <i class="fas fa-arrow-right"></i></a>
+    </div>
+    <div class="td-rates__grid">
+      <div class="td-rate-card td-rate-card--featured">
+        <div class="td-rate-card__badge">Most Popular</div>
+        <h3 class="td-rate-card__title">Series I Savings Bonds</h3>
+        <div class="td-rate-card__rate">4.03<span class="td-rate-card__pct">%</span></div>
+        <p class="td-rate-card__detail">Composite rate</p>
+        <div class="td-rate-card__meta">
+          <div class="td-rate-card__meta-item">
+            <span class="td-rate-card__meta-label">Fixed Rate</span>
+            <span class="td-rate-card__meta-value">0.90%</span>
+          </div>
+          <div class="td-rate-card__meta-item">
+            <span class="td-rate-card__meta-label">Issued</span>
+            <span class="td-rate-card__meta-value">Nov 2025 – Apr 2026</span>
+          </div>
+        </div>
+        <a href="#" class="td-btn td-btn--primary td-btn--full">Buy I Bonds</a>
+      </div>
+      <div class="td-rate-card">
+        <h3 class="td-rate-card__title">Series EE Savings Bonds</h3>
+        <div class="td-rate-card__rate">2.50<span class="td-rate-card__pct">%</span></div>
+        <p class="td-rate-card__detail">Fixed rate</p>
+        <div class="td-rate-card__meta">
+          <div class="td-rate-card__meta-item">
+            <span class="td-rate-card__meta-label">Guaranteed</span>
+            <span class="td-rate-card__meta-value">Double in 20 years</span>
+          </div>
+          <div class="td-rate-card__meta-item">
+            <span class="td-rate-card__meta-label">Issued</span>
+            <span class="td-rate-card__meta-value">Nov 2025 – Apr 2026</span>
+          </div>
+        </div>
+        <a href="#" class="td-btn td-btn--outline td-btn--full">Buy EE Bonds</a>
+      </div>
+      <div class="td-rate-card">
+        <h3 class="td-rate-card__title">10-Year Treasury Notes</h3>
+        <div class="td-rate-card__rate">4.125<span class="td-rate-card__pct">%</span></div>
+        <p class="td-rate-card__detail">Coupon rate</p>
+        <div class="td-rate-card__meta">
+          <div class="td-rate-card__meta-item">
+            <span class="td-rate-card__meta-label">Price per $100</span>
+            <span class="td-rate-card__meta-value">$99.25</span>
+          </div>
+          <div class="td-rate-card__meta-item">
+            <span class="td-rate-card__meta-label">CUSIP</span>
+            <span class="td-rate-card__meta-value">91282CPZ8</span>
+          </div>
+        </div>
+        <a href="#" class="td-btn td-btn--outline td-btn--full">View Details</a>
+      </div>
+      <div class="td-rate-card">
+        <h3 class="td-rate-card__title">30-Year Treasury Bonds</h3>
+        <div class="td-rate-card__rate">4.750<span class="td-rate-card__pct">%</span></div>
+        <p class="td-rate-card__detail">Coupon rate</p>
+        <div class="td-rate-card__meta">
+          <div class="td-rate-card__meta-item">
+            <span class="td-rate-card__meta-label">Price per $100</span>
+            <span class="td-rate-card__meta-value">$98.10</span>
+          </div>
+          <div class="td-rate-card__meta-item">
+            <span class="td-rate-card__meta-label">CUSIP</span>
+            <span class="td-rate-card__meta-value">912810UR7</span>
+          </div>
+        </div>
+        <a href="#" class="td-btn td-btn--outline td-btn--full">View Details</a>
+      </div>
+    </div>
+    <div class="td-rates__auction-cta">
+      <div class="td-rates__auction-info">
+        <i class="fas fa-gavel"></i>
+        <div>
+          <strong>Upcoming Auction</strong>
+          <span>4-Week Bills &mdash; April 1, 2026</span>
+        </div>
+      </div>
+      <a href="#" class="td-btn td-btn--outline td-btn--sm">See All Auctions <i class="fas fa-arrow-right"></i></a>
+    </div>
+  </div>
+</section>
+
+<!-- ===== Alert / Processing Times ===== -->
+<section class="td-section">
+  <div class="td-container">
+    <div class="td-alert td-alert--warning">
+      <div class="td-alert__icon"><i class="fas fa-triangle-exclamation"></i></div>
+      <div class="td-alert__body">
+        <h3 class="td-alert__heading">Processing Times Notice</h3>
+        <p>Heavy volume is slowing our response time to requests sent by mail. Some transactions require at least six weeks of processing time.</p>
+        <details class="td-alert__details">
+          <summary>View full processing time details</summary>
+          <ul>
+            <li>Cashing paper savings bonds where you are named on the bonds: <strong>6+ weeks</strong></li>
+            <li>Unlocking your account or updating banking information: <strong>6+ weeks</strong></li>
+            <li>Converting paper bonds to electronic format: <strong>6+ weeks</strong></li>
+            <li>Lost, stolen, or missing savings bonds: <strong>7+ months</strong></li>
+            <li>Other requests including trusts: <strong>10+ months</strong></li>
+          </ul>
+        </details>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== Announcements ===== -->
+<section class="td-section">
+  <div class="td-container">
+    <div class="td-announcements">
+      <div class="td-announcements__icon"><i class="fas fa-bullhorn"></i></div>
+      <div class="td-announcements__content">
+        <h3>Announcements for Account Holders</h3>
+        <ul class="td-announcements__list">
+          <li>2025 1099 tax forms for TreasuryDirect are available. <a href="#">See 1099 information</a>.</li>
+          <li>The annual purchase limit for Series I savings bonds is <strong>$10,000</strong>.</li>
+          <li>Check out our new <a href="#">savings bond explainer page</a>.</li>
+          <li>Call us at <a href="tel:844-284-2676"><i class="fas fa-phone"></i> 844-284-2676</a> (Mon–Fri, 8am–6pm ET).</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== Help Center ===== -->
+<section class="td-section td-help">
+  <div class="td-container">
+    <div class="td-help__header">
+      <h2 class="td-section__heading">Help Center</h2>
+      <p class="td-section__subheading">Find answers to common questions and get the support you need</p>
+    </div>
+    <div class="td-help__grid">
+      <div class="td-help-card">
+        <div class="td-help-card__icon"><i class="fas fa-piggy-bank"></i></div>
+        <h3>Savings Bonds</h3>
+        <ul class="td-help-card__links">
+          <li><a href="#">Redeeming a Paper Savings Bond</a></li>
+          <li><a href="#">Change of Ownership</a></li>
+          <li><a href="#">Lost, Stolen, or Destroyed Bonds</a></li>
+        </ul>
+        <a href="#" class="td-help-card__more">See all topics <i class="fas fa-arrow-right"></i></a>
+      </div>
+      <div class="td-help-card">
+        <div class="td-help-card__icon"><i class="fas fa-gavel"></i></div>
+        <h3>Securities &amp; Auctions</h3>
+        <ul class="td-help-card__links">
+          <li><a href="#">Participate in an Auction</a></li>
+          <li><a href="#">Types of Bids</a></li>
+          <li><a href="#">Searching by CUSIP Number</a></li>
+        </ul>
+        <a href="#" class="td-help-card__more">See all topics <i class="fas fa-arrow-right"></i></a>
+      </div>
+      <div class="td-help-card">
+        <div class="td-help-card__icon"><i class="fas fa-circle-question"></i></div>
+        <h3>Account &amp; Login</h3>
+        <ul class="td-help-card__links">
+          <li><a href="#">Forgot My Password</a></li>
+          <li><a href="#">Forgot My Account Number</a></li>
+          <li><a href="#">Help with One-time Passcodes</a></li>
+        </ul>
+        <a href="#" class="td-help-card__more">See all topics <i class="fas fa-arrow-right"></i></a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== Latest News ===== -->
+<section class="td-section">
+  <div class="td-container">
+    <div class="td-news__header">
+      <h2 class="td-section__heading">Latest News</h2>
+      <a href="#" class="td-btn td-btn--outline td-btn--sm">See All News <i class="fas fa-arrow-right"></i></a>
+    </div>
+    <div class="td-news__grid">
+      <article class="td-news-card">
+        <div class="td-news-card__date">
+          <span class="td-news-card__month">Mar</span>
+          <span class="td-news-card__day">2026</span>
+        </div>
+        <div class="td-news-card__body">
+          <h3><a href="#">The Fiscal Service Announces Activity for Securities in the STRIPS Program for February 2026</a></h3>
+          <p>Monthly report on Separate Trading of Registered Interest and Principal of Securities activity.</p>
+        </div>
+      </article>
+      <article class="td-news-card">
+        <div class="td-news-card__date">
+          <span class="td-news-card__month">Jan</span>
+          <span class="td-news-card__day">2026</span>
+        </div>
+        <div class="td-news-card__body">
+          <h3><a href="#">The Fiscal Service Announces Activity for Securities in the STRIPS Program for December 2025</a></h3>
+          <p>Monthly report on STRIPS program activity for the period ending December 2025.</p>
+        </div>
+      </article>
+      <article class="td-news-card">
+        <div class="td-news-card__date">
+          <span class="td-news-card__month">Nov</span>
+          <span class="td-news-card__day">2025</span>
+        </div>
+        <div class="td-news-card__body">
+          <h3><a href="#">New Series I Savings Bond Rate Announced: 4.03% Composite Rate</a></h3>
+          <p>The new composite rate for I bonds issued from November 2025 through April 2026 is 4.03%.</p>
+        </div>
+      </article>
+    </div>
+  </div>
+</section>
+
+<!-- ===== Gift CTA ===== -->
+<section class="td-gift-cta">
+  <div class="td-container">
+    <div class="td-gift-cta__inner">
+      <div class="td-gift-cta__content">
+        <h2>Give the gift that grows</h2>
+        <p>U.S. Savings Bonds make a meaningful, lasting gift for birthdays, graduations, holidays, and more. Start gifting in minutes.</p>
+        <a href="#" class="td-btn td-btn--primary td-btn--lg">Gift a Savings Bond <i class="fas fa-arrow-right"></i></a>
+      </div>
+      <div class="td-gift-cta__visual">
+        <div class="td-gift-cta__icon">
+          <i class="fas fa-gift"></i>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== Contact ===== -->
+<section class="td-section td-contact">
+  <div class="td-container">
+    <h2 class="td-section__heading td-section__heading--center">We're Here to Help</h2>
+    <div class="td-contact__grid">
+      <a href="#" class="td-contact-card">
+        <i class="fas fa-envelope"></i>
+        <h3>Email Us</h3>
+        <p>Send us a secure message</p>
+      </a>
+      <a href="tel:844-284-2676" class="td-contact-card">
+        <i class="fas fa-phone"></i>
+        <h3>Call Us</h3>
+        <p>844-284-2676<br>Mon–Fri, 8am–6pm ET</p>
+      </a>
+      <a href="#" class="td-contact-card">
+        <i class="fas fa-book"></i>
+        <h3>Help Center</h3>
+        <p>Browse FAQs and guides</p>
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- ===== Footer ===== -->
+<footer class="td-footer">
+  <div class="td-container">
+    <div class="td-footer__top">
+      <div class="td-footer__brand">
+        <svg width="32" height="32" viewBox="0 0 36 36" fill="none">
+          <rect width="36" height="36" rx="8" fill="#1a4480"/>
+          <text x="18" y="24" text-anchor="middle" font-size="18" font-weight="700" fill="white" font-family="Public Sans, sans-serif">TD</text>
+        </svg>
+        <div>
+          <strong>TreasuryDirect</strong>
+          <span>U.S. Department of the Treasury</span>
+        </div>
+      </div>
+      <div class="td-footer__search">
+        <input type="search" placeholder="Search TreasuryDirect..." class="td-footer__search-input">
+        <button class="td-footer__search-btn"><i class="fas fa-search"></i></button>
+      </div>
+    </div>
+    <div class="td-footer__columns">
+      <div class="td-footer__col">
+        <h4>Connect</h4>
+        <ul>
+          <li><a href="#"><i class="fab fa-x-twitter"></i> X (Twitter)</a></li>
+          <li><a href="#"><i class="fab fa-facebook"></i> Facebook</a></li>
+          <li><a href="#"><i class="fab fa-youtube"></i> YouTube</a></li>
+          <li><a href="#"><i class="fas fa-rss"></i> RSS Feeds</a></li>
+        </ul>
+      </div>
+      <div class="td-footer__col">
+        <h4>Legal</h4>
+        <ul>
+          <li><a href="#">Freedom of Information Act</a></li>
+          <li><a href="#">Privacy Policy</a></li>
+          <li><a href="#">Terms &amp; Conditions</a></li>
+          <li><a href="#">Data Quality</a></li>
+          <li><a href="#">Accessibility</a></li>
+          <li><a href="#">For Web Developers</a></li>
+        </ul>
+      </div>
+      <div class="td-footer__col">
+        <h4>Related Sites</h4>
+        <ul>
+          <li><a href="#">treasury.gov <i class="fas fa-up-right-from-square"></i></a></li>
+          <li><a href="#">fiscaldata.treasury.gov <i class="fas fa-up-right-from-square"></i></a></li>
+          <li><a href="#">USAspending.gov <i class="fas fa-up-right-from-square"></i></a></li>
+          <li><a href="#">USA.gov <i class="fas fa-up-right-from-square"></i></a></li>
+          <li><a href="#">Data.gov <i class="fas fa-up-right-from-square"></i></a></li>
+        </ul>
+      </div>
+      <div class="td-footer__col">
+        <h4>Quick Links</h4>
+        <ul>
+          <li><a href="#">Mailing Lists</a></li>
+          <li><a href="#">News</a></li>
+          <li><a href="#">About</a></li>
+          <li><a href="#">Forms</a></li>
+          <li><a href="#">Contact Us</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="td-footer__bottom">
+      <p>Looking for information about the U.S. Treasury? Visit <a href="https://www.treasury.gov">treasury.gov</a></p>
+    </div>
+  </div>
+</footer>
+
+<script>
+  // Banner toggle
+  document.getElementById('bannerToggle').addEventListener('click', function() {
+    const content = document.getElementById('bannerContent');
+    const expanded = this.getAttribute('aria-expanded') === 'true';
+    this.setAttribute('aria-expanded', !expanded);
+    content.hidden = expanded;
+  });
+
+  // Search overlay
+  document.getElementById('searchToggle').addEventListener('click', function() {
+    document.getElementById('searchOverlay').hidden = false;
+    document.getElementById('searchOverlay').querySelector('input').focus();
+  });
+  document.getElementById('searchClose').addEventListener('click', function() {
+    document.getElementById('searchOverlay').hidden = true;
+  });
+
+  // Mobile menu
+  document.getElementById('mobileToggle').addEventListener('click', function() {
+    document.querySelector('.td-header__nav').classList.toggle('td-header__nav--open');
+    document.querySelector('.td-header__actions').classList.toggle('td-header__actions--open');
+  });
+</script>
+</body>
+</html>
